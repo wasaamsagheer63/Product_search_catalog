@@ -1,8 +1,11 @@
 import 'package:angolia_search_project/View/ProductsView.dart';
-import 'package:angolia_search_project/ViewModel/dependencies.dart';
+import 'package:angolia_search_project/View/addProducts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'ViewModel/dependencies/add_product_dependencies.dart';
+import 'ViewModel/dependencies/viewProducts_dependencies.dart';
 
 void main(){
   runApp(MyApp());
@@ -15,6 +18,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
 getPages: [
   GetPage(name: "/ProductsView", page:() =>ProductsView(),binding: ProductBindings()),
+  GetPage(name: "/addProduct", page:() =>AddProducts(),binding: AddProductBindings()),
+
 ],
       initialRoute: "/ProductsView",
     );
