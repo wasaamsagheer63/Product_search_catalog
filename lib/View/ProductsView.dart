@@ -1,3 +1,4 @@
+import 'package:angolia_search_project/Algolia_Service/algolia_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,11 +15,24 @@ class ProductsView extends StatefulWidget {
 class _ProductsViewState extends State<ProductsView> {
 
   late final ProductViewModel productsViewModel ;
+  late final algoliaServices;
   @override
   void initState(){
     super.initState();
     productsViewModel = Get.find();
+    algoliaServices = AlgoliaServices();
   }
+
+  void uploadfirstObject() async{
+    final success = await algoliaServices.sendDatatoAlgoliaStructure();
+    if(success){
+      Get.snackbar("Success", "Data is send to algolia");
+    }
+    else{
+      Get.snackbar("Error", "Data is not send to algolia");
+    }
+  }
+
   void showData(Products product){
      showDialog(
          context: context,
@@ -271,6 +285,10 @@ class _ProductsViewState extends State<ProductsView> {
         title: Text("Product Catalog"),
         actions: [
           IconButton(onPressed: () => productsViewModel.refreshData(), icon: Icon(Icons.refresh_outlined))
+        ,TextButton(onPressed: (){
+          uploadfirstObject();
+          Get.snackbar("Message", "Process is completed");
+          }, child: Text("Transfer Object"))
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: () => Get.toNamed("/addProduct"),child: Icon(Icons.add),),

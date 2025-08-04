@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "1.0.2"
   algoliasearch:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: algoliasearch
       sha256: "9e987159d8d943efb6e76c5788986516d652a3a100e688eeb25865c423b02a98"
@@ -89,6 +89,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
+  convert:
+    dependency: "direct main"
+    description:
+      name: convert
+      sha256: b30acd5944035672bc15c6b7a8b47d773e41e2f17de064350988c5d02adb1c68
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
   crypto:
     dependency: transitive
     description:
