@@ -40,7 +40,7 @@ class ProductRepo {
         Get.snackbar("Success","Product is deleted successfully");
       }
       else{
-        Get.snackbar("Error", "Problem in deltetion${datadelete.statusCode}");
+        Get.snackbar("Error ","Problem in deletion ${datadelete.statusCode}");
       }
     }
     catch(e){
@@ -58,7 +58,7 @@ class ProductRepo {
         Get.snackbar("Success", "Product is uploaded");
       }
       else{
-        print("Product is not Stored ${newData.statusCode}");
+        Get.snackbar("Error","Product is not Stored ${newData.statusCode}");
       }
     }
         catch(e){
@@ -73,10 +73,10 @@ class ProductRepo {
           headers: {'Content-Type':'application/json'},
           body: jsonEncode(product.toMap()));
       if (newData.statusCode == 200) {
-        Get.snackbar("Success", "Product is uploaded");
+        Get.snackbar("Success", "Product is updated");
       }
       else{
-        print("Product is not Stored ${newData.statusCode}");
+        Get.snackbar("Error","Product is not Updated ${newData.statusCode}");
       }
     }
     catch(e){

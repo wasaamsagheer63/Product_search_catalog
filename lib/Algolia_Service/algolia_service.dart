@@ -47,17 +47,14 @@ class AlgoliaServices{
                'size':item['Size'],
                'availability':item['Availability'],
                'internalID':item['Internal ID'],
-               'priceRange':priceRange(item['Price']),
-               'inStock':item['Availability'] == 'in_Stock',
                'searchableText':'${item['Name']} ${item['Description']} ${item['Brand']} ${item['Category']}',
              };
              AlgoliaList.add(algoliaobject);
            }
-           print("print Algolia First Object ${AlgoliaList.first}");
             bool success = await sendDataToAlgoliaServer(AlgoliaList);
     if(success){
    await settings();
-   Get.snackbar("Success", "Data is transfered and setting is configured correctly");
+   print("Success Data is transfered and setting is configured correctly");
    return true;
 }else{
   return false;
@@ -128,7 +125,6 @@ class AlgoliaServices{
              'size',
              'availability',
              'priceRange',
-             'inStock'
            ],
            'customRanking': ['desc(stock)', 'asc(price)'],
            'typoTolerance': true,
@@ -157,13 +153,7 @@ class AlgoliaServices{
        }
      }
 
-       String priceRange(int price){
-       if(price < 100) return 'Under 100';
-       if(price < 500) return '100 - 500';
-       if(price < 1000) return '500 - 1000';
-       if(price < 5000) return '1000 - 5000';
-      return "Over 5000";
-     }
+
 
      void dispose(){
        searcher.dispose();

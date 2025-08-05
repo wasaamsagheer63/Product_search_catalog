@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'View/algolia_search.dart';
 import 'ViewModel/dependencies/add_product_dependencies.dart';
 import 'ViewModel/dependencies/viewProducts_dependencies.dart';
 
@@ -16,9 +17,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
 getPages: [
   GetPage(name: "/ProductsView", page:() =>ProductsView(),binding: ProductBindings()),
   GetPage(name: "/addProduct", page:() =>AddProducts(),binding: AddProductBindings()),
+  GetPage(name: "/search", page: () => SearchAlgolia()),
 
 ],
       initialRoute: "/ProductsView",

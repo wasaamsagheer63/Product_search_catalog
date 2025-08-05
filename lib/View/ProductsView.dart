@@ -23,10 +23,10 @@ class _ProductsViewState extends State<ProductsView> {
     algoliaServices = AlgoliaServices();
   }
 
-  void uploadfirstObject() async{
+  void uploadData() async{
     final success = await algoliaServices.sendDatatoAlgoliaStructure();
     if(success){
-      Get.snackbar("Success", "Data is send to algolia");
+      print("Success Data is send to algolia");
     }
     else{
       Get.snackbar("Error", "Data is not send to algolia");
@@ -65,7 +65,7 @@ class _ProductsViewState extends State<ProductsView> {
                          TextButton(onPressed: () {
                            Navigator.of(context).pop();
                            updateData(product);},
-                             child: Text("Update",style:TextStyle(color: Colors.red),)),
+                             child: Text("Update")),
                        ],
                      )
 
@@ -285,10 +285,13 @@ class _ProductsViewState extends State<ProductsView> {
         title: Text("Product Catalog"),
         actions: [
           IconButton(onPressed: () => productsViewModel.refreshData(), icon: Icon(Icons.refresh_outlined))
-        ,TextButton(onPressed: (){
-          uploadfirstObject();
-          Get.snackbar("Message", "Process is completed");
-          }, child: Text("Transfer Object"))
+        ,
+          IconButton(
+              onPressed: (){
+                uploadData();
+                Get.toNamed("/search");},
+              icon: Icon(Icons.search)
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: () => Get.toNamed("/addProduct"),child: Icon(Icons.add),),

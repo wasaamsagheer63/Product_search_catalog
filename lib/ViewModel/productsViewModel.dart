@@ -37,7 +37,6 @@ class ProductViewModel extends GetxController {
     try {
       await productsRepo.delete(id);
       products.removeWhere((product) => product.id == id);
-      Get.snackbar("Title", "Data deleted",);
     }
     catch (e) {
       throw Exception(e.toString());
@@ -69,32 +68,32 @@ class ProductViewModel extends GetxController {
     
 
     if(name.isEmpty){
-      errorList.add("Fill this with updated  Name");
+      errorList.add("Fill this with   Name");
       isValid = false;
     }
 
     if(description.isEmpty){
-      errorList.add("Fill this with updated  description");
+      errorList.add("Fill this with description");
       isValid = false;
     }
 
     if(brand.isEmpty){
-      errorList.add("Fill this with updated  brand");
+      errorList.add("Fill this with  brand");
       isValid = false;
     }
 
     if(category.isEmpty){
-      errorList.add("Fill this with updated  category");
+      errorList.add("Fill this with   category");
       isValid = false;
     }
 
     if(price.isEmpty){
-      errorList.add("Fill this with updated  Price");
+      errorList.add("Fill this with  Price");
       isValid = false;
     }
 
     if(currency.isEmpty){
-      errorList.add("Fill this with updated  currency");
+      errorList.add("Fill this with  currency");
       isValid = false;
     }
 
@@ -124,7 +123,7 @@ class ProductViewModel extends GetxController {
     }
 
     if(internalID.isEmpty){
-      errorList.add("Fill this with updated  Internal ID");
+      errorList.add("Fill this with Internal ID");
       isValid = false;
     }
     Products product =Products("", int.parse(index), name, description, brand, category, int.parse(price), currency, int.parse(stoke), int.parse(ean), color, size, availability, int.parse(internalID));
@@ -132,10 +131,13 @@ class ProductViewModel extends GetxController {
       if(isValid){
         loading.value = true;
       await productsRepo.sendData(product);
-      Get.snackbar("Success", "Product is Stored");
+      ("Success", "Product is Stored");
       loadData();
        }
       else{
+        for(var error in errorList){
+          Get.snackbar("Error","${error}");
+        }
         return;
       }
     }
@@ -201,27 +203,27 @@ class ProductViewModel extends GetxController {
     }
 
     if(stoke.isEmpty){
-      errorList.add("Fill the stoke value");
+      errorList.add("Fill the updated stoke value");
       isValid = false;
     }
 
     if(ean.isEmpty){
-      errorList.add("Fill the EAN value");
+      errorList.add("Fill the updated EAN value");
       isValid = false;
     }
 
     if(color.isEmpty){
-      errorList.add("Fill the Color Value");
+      errorList.add("Fill the updated Color Value");
       isValid = false;
     }
 
     if(size.isEmpty){
-      errorList.add("Fill the Size value");
+      errorList.add("Fill the updated Size value");
       isValid = false;
     }
 
     if(availability.isEmpty){
-      errorList.add("Fill Availability value");
+      errorList.add("Fill updated Availability value");
       isValid = false;
     }
 
@@ -234,10 +236,12 @@ class ProductViewModel extends GetxController {
       if(isValid){
         loading.value = true;
         await productsRepo.updateData(product);
-        Get.snackbar("Success", "Product is Updated");
         loadData();
       }
       else{
+        for(var error in errorList){
+          Get.snackbar("Error","${error}");
+        }
         return;
       }
     }
