@@ -15,18 +15,13 @@ class _SearchAlgoliaState extends State<SearchAlgolia> {
   late final AlgoliaServices algoliaServices;
   late final HitsSearcher searcher;
   bool loading = false;
+  bool facetloading = true;
 
   String seletedbrand = '';
   String seletedCategory = '';
 
-  List<String> Brands = [
-    'Garner, Boyle and Flynn',
-    'Mueller Inc',
-    'Lawson, Keller and Winters',
-    'Gallagher and Sons',
-    'Irwin LLC'
-  ];
-  List<String> Categories = ['Health & Wellness', 'Office Supplies','Cleaning Supplies','Automotive '];
+  List<String> Brands = [];
+  List<String> Categories = [];
 
   List<Map<String, dynamic>> searchList = [];
 
@@ -39,11 +34,14 @@ class _SearchAlgoliaState extends State<SearchAlgolia> {
     searcher.responses.listen((responce) {
       setState(() {
         loading = false;
+        facetloading = false;
       });
-      searchList = responce.hits
-          .map((hit) => Map<String, dynamic>.from(hit))
-          .toList();
+      searchList = responce.hits.map((hit) => Map<String, dynamic>.from(hit)).toList();
+      Brands = responce.facets['brand']!.map((facets) => facets.value).toList();
+      Categories = responce.facets['category']!.map((facets) => facets.value).toList();
     });
+
+
     performSearch('');
   }
 
@@ -60,7 +58,8 @@ class _SearchAlgoliaState extends State<SearchAlgolia> {
       (state) => state.copyWith(
         query: query,
         facetFilters: FilteredList.isNotEmpty ? FilteredList : <String>[],
-        hitsPerPage: 50
+        hitsPerPage: 50,
+        facets: ['brand','category']
       ),
     );
   }
